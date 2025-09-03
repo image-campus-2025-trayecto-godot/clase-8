@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqkvovjo1rubu"]
+
+[ext_resource type="Script" uid="uid://bxasvebc6xkf5" path="res://enemy/enemy.gd" id="1_4srbt"]
+[ext_resource type="Texture2D" uid="uid://dx3k7syivw163" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile271.png" id="2_qrq1p"]
+
+[node name="Plane" type="PathFollow2D"]
+rotation = 0.0505897
+loop = false
+script = ExtResource("1_4srbt")
+speed = 306.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -0.0505897
+texture = ExtResource("2_qrq1p")
