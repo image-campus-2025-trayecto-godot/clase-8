@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcgx72jb0tes4"]
+
+[ext_resource type="Script" uid="uid://beuq6b073g8yn" path="res://projectiles/projectile.gd" id="1_7nr1q"]
+[ext_resource type="Texture2D" uid="uid://5vugj68nn4ud" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile295.png" id="1_ighsu"]
+[ext_resource type="Texture2D" uid="uid://c74uf80nj5xnl" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile296.png" id="2_7nr1q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lgr22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ighsu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7nr1q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr1q"]
+size = Vector2(20, 31)
+
+[node name="Projectile" type="Area2D"]
+top_level = true
+collision_layer = 0
+script = ExtResource("1_7nr1q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_lgr22")
+frame_progress = 0.345818
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_7nr1q")

@@ -1,14 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqkvovjo1rubu"]
+[gd_scene load_steps=5 format=3 uid="uid://cqkvovjo1rubu"]
 
 [ext_resource type="Script" uid="uid://bxasvebc6xkf5" path="res://enemy/enemy.gd" id="1_4srbt"]
 [ext_resource type="Texture2D" uid="uid://dx3k7syivw163" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile271.png" id="2_qrq1p"]
+[ext_resource type="Script" uid="uid://l2wakr1660fy" path="res://enemy/enemy_hitbox.gd" id="3_qrq1p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4srbt"]
+size = Vector2(42.2118, 51.8656)
 
 [node name="Plane" type="PathFollow2D"]
-rotation = 0.0505897
 loop = false
 script = ExtResource("1_4srbt")
 speed = 306.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = -0.0505897
 texture = ExtResource("2_qrq1p")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("3_qrq1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.967116, 0.0671995)
+shape = SubResource("RectangleShape2D_4srbt")

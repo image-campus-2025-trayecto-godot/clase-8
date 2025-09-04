@@ -23,6 +23,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/extendable_inspector/plugin.cfg", "res://addons/slides/plugin.cfg")
 
+[layer_names]
+
+2d_physics/layer_1="enemies"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
