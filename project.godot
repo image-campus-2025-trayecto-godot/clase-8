@@ -15,13 +15,25 @@ run/main_scene="uid://bfvvxrb4pe1at"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+RuakeLayer="*res://addons/ruake/ruake/ruake_layer.tscn"
+
 [display]
 
 window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/extendable_inspector/plugin.cfg", "res://addons/slides/plugin.cfg")
+enabled=PackedStringArray("res://addons/extendable_inspector/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/ruake/plugin.cfg", "res://addons/slides/plugin.cfg")
+
+[input]
+
+toggle_ruake={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":49,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 

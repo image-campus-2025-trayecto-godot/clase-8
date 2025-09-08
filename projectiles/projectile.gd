@@ -13,8 +13,11 @@ func _process(delta: float) -> void:
 func on_area_entered(area: EnemyHitbox) -> void:
 	if impacted or area.destroyed:
 		return
+	impact(area)
+
+func impact(enemy_hitbox: EnemyHitbox):
 	impacted = true
-	area.was_shot()
+	enemy_hitbox.was_shot()
 	queue_free()
 
 func be_shot(a_velocity) -> void:

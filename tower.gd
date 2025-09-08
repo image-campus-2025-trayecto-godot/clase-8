@@ -1,16 +1,16 @@
 extends Node2D
 
-const PROJECTILE = preload("res://projectiles/projectile.tscn")
-
 @onready var area_2d: Area2D = $Area2D
-@onready var cannon: Node2D = $Cannon
+@onready var cannon: Node2D
 @onready var shoot_timer: Timer = $ShootTimer
-@onready var projectile_spawn: Marker2D = $Cannon/ProjectileSpawn
+@export var cannon_scene: PackedScene
 
 var enemies = []
 var can_shoot: bool = true
 
 func _ready() -> void:
+	cannon = cannon_scene.instantiate()
+	add_child(cannon)
 	area_2d.area_entered.connect(on_area_entered)
 	area_2d.area_exited.connect(on_area_exited)
 
@@ -24,10 +24,7 @@ func shoot() -> void:
 	if enemies.is_empty():
 		return
 	can_shoot = false
-	var projectile = PROJECTILE.instantiate()
-	projectile.be_shot(Vector2.RIGHT.rotated(cannon.rotation) * 400)
-	projectile_spawn.add_child(projectile)
-	projectile.global_position = projectile_spawn.global_position
+	cannon.shoot()
 	shoot_timer.start()
 	await shoot_timer.timeout
 	can_shoot = true

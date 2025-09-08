@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuf72vampr746"]
+
+[ext_resource type="Texture2D" uid="uid://d1kd4ti6qm3ol" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png" id="1_6ciym"]
+[ext_resource type="Script" uid="uid://cc8704nm7gidx" path="res://tower/cannons/cannon.gd" id="1_cpyxh"]
+
+[node name="Cannon" type="Node2D" node_paths=PackedStringArray("projectile_spawns")]
+script = ExtResource("1_cpyxh")
+projectile_spawns = [NodePath("ProjectileSpawn"), NodePath("ProjectileSpawn2")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_6ciym")
+offset = Vector2(0, -14)
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+position = Vector2(38, -7)
+
+[node name="ProjectileSpawn2" type="Marker2D" parent="."]
+position = Vector2(38, 7)
