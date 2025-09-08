@@ -10,7 +10,7 @@ size = Vector2(42.2118, 51.8656)
 [node name="Plane" type="PathFollow2D"]
 loop = false
 script = ExtResource("1_4srbt")
-speed = 306.0
+speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qrq1p")

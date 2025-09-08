@@ -1,6 +1,6 @@
 extends Node2D
 
-const PLANE = preload("res://enemy/plane.tscn")
+const PLANE = preload("res://enemy/armored_plane.tscn")
 
 @onready var spawn_timer: Timer = $SpawnTimer
 @export var routes: Array[Path2D]

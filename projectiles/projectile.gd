@@ -1,3 +1,4 @@
+class_name Projectile
 extends Area2D
 
 @export var velocity: Vector2 = Vector2.RIGHT

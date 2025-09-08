@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://dvd7nakwwre3f"]
+[gd_scene load_steps=26 format=3 uid="uid://dvd7nakwwre3f"]
 
 [ext_resource type="Script" uid="uid://dtoovey3km3b3" path="res://addons/slides/diapositivas.gd" id="1_rsqhl"]
 [ext_resource type="Texture2D" uid="uid://cl0in05ct05mh" path="res://addons/slides/imagenes/image-background.jpg" id="2_1uuhd"]
+[ext_resource type="Script" uid="uid://carpg1ibddqua" path="res://addons/slides/titulo.gd" id="3_ybn4d"]
 [ext_resource type="Script" uid="uid://dfdbi6jh3g81j" path="res://addons/slides/preguntas.gd" id="8_w1i3l"]
 [ext_resource type="Script" uid="uid://msk025ywgcpd" path="res://addons/slides/pasar_lista.gd" id="10_pu0nv"]
 
@@ -140,7 +141,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("1_rsqhl")
-diapositiva_actual = 1
+diapositiva_actual = 4
 metadata/_edit_lock_ = true
 
 [node name="Holi" type="Control" parent="."]
@@ -215,12 +216,13 @@ offset_bottom = 203.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_pu0nv")
-text = "Clase 5 - 2D"
+text = "Clase 6 - 2D"
 label_settings = SubResource("LabelSettings_oxxs5")
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Agenda" type="Control" parent="."]
+visible = false
 layout_mode = 2
 anchors_preset = 0
 anchor_right = 1.0
@@ -270,17 +272,20 @@ offset_bottom = 473.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "- Repaso
-- Ejemplo nuevo: Tower Defense
-- Spawneando hordas de enemigos
-- Creando una torre
-- Disparando proyectiles
-- Configurando distintos tipos de enemigos
-- Animaciones y partículas
-"
+- ¿Como testeamos la interacción Enemigos <-> Disparos?
+- Agregando un enemigo con armadura
+- Múltiples torres
+  - Doble disparo  
+  - Daño de área
+  - Daño continuo
+- Animaciones
+  - Disparo del cañón
+  - Caída de enemigos
+  - Partículas"
 label_settings = SubResource("LabelSettings_u1c6c")
 autowrap_mode = 2
 
-[node name="Repaso" type="Control" parent="."]
+[node name="Testeando las colisiones" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -289,9 +294,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("3_ybn4d")
+titulo = "Testeando las colisiones"
 metadata/_edit_lock_ = true
 
-[node name="Repaso" type="Label" parent="Repaso"]
+[node name="Testeando las colisiones" type="Label" parent="Testeando las colisiones"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -303,33 +310,7 @@ offset_top = -115.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
-text = "Hordas de enemigos"
-label_settings = SubResource("LabelSettings_fn8aw")
-
-[node name="CoyoteTime" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="CoyoteTime" type="Label" parent="CoyoteTime"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -451.0
-offset_top = -109.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
-text = "La torre"
+text = "Testeando las colisiones"
 label_settings = SubResource("LabelSettings_fn8aw")
 
 [node name="PasarLista" type="Control" parent="."]
@@ -368,7 +349,34 @@ libraries = {
 autoplay = "new_animation"
 speed_scale = 2.0
 
-[node name="ControlarElSalto" type="Control" parent="."]
+[node name="Enemigo con armadura" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_ybn4d")
+titulo = "Enemigo con armadura"
+metadata/_edit_lock_ = true
+
+[node name="Enemigo con armadura" type="Label" parent="Enemigo con armadura"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -451.0
+offset_top = -109.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
+text = "Enemigo con armadura"
+label_settings = SubResource("LabelSettings_fn8aw")
+
+[node name="Disparo doble" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -377,9 +385,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("3_ybn4d")
+titulo = "Disparo doble"
 metadata/_edit_lock_ = true
 
-[node name="ControlarElSalto" type="Label" parent="ControlarElSalto"]
+[node name="Disparo doble" type="Label" parent="Disparo doble"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -392,10 +402,10 @@ offset_right = 86.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
-text = "Disparando"
+text = "Disparo doble"
 label_settings = SubResource("LabelSettings_fn8aw")
 
-[node name="Camara" type="Control" parent="."]
+[node name="Daño de area" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -404,9 +414,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("3_ybn4d")
+titulo = "Daño de area"
 metadata/_edit_lock_ = true
 
-[node name="Camara" type="Label" parent="Camara"]
+[node name="Daño de area" type="Label" parent="Daño de area"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -418,10 +430,10 @@ offset_top = -115.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
-text = "Mas enemigos"
+text = "Daño de area"
 label_settings = SubResource("LabelSettings_fn8aw")
 
-[node name="Camara2" type="Control" parent="."]
+[node name="Daño continuo" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -430,9 +442,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("3_ybn4d")
+titulo = "Daño continuo"
 metadata/_edit_lock_ = true
 
-[node name="Camara" type="Label" parent="Camara2"]
+[node name="Daño continuo" type="Label" parent="Daño continuo"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -444,7 +458,35 @@ offset_top = -115.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
-text = "Partículas y animaciones"
+text = "Daño continuo"
+label_settings = SubResource("LabelSettings_fn8aw")
+
+[node name="Jugosidad" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_ybn4d")
+titulo = "Jugosidad"
+metadata/_edit_lock_ = true
+
+[node name="Jugosidad" type="Label" parent="Jugosidad"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -727.0
+offset_top = -115.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x7tbg")
+text = "Jugosidad"
 label_settings = SubResource("LabelSettings_fn8aw")
 
 [node name="Preguntas" type="Control" parent="."]

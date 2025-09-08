@@ -1,5 +1,7 @@
+class_name Enemy
 extends PathFollow2D
 
+@export var hit_points: int = 1
 @export_range(1, 1000, 1) var speed: float = 100.0
 @onready var hitbox: EnemyHitbox = $Hitbox
 
@@ -12,5 +14,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func on_received_damage():
-	hitbox.destroyed = true
-	queue_free()
+	hit_points -= 1
+	if(hit_points <= 0):
+		hitbox.destroyed = true
+		queue_free()

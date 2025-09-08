@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cimawwstbge24"]
+
+[ext_resource type="Script" uid="uid://diqxhbsascyjw" path="res://tests/test_if_2_projectiles_collide_with_a_plane_at_the_same_time_only_one_of_them_hits.gd" id="1_qnk1p"]
+[ext_resource type="Script" uid="uid://dotdnq33ao6w7" path="res://tests/projectiles_test.gd" id="1_xd3u2"]
+[ext_resource type="Script" uid="uid://bkkipw4uq0yvm" path="res://tests/test_one_projectile_can_only_hit_one_enemy.gd" id="4_oogq2"]
+
+[node name="ProjectilesTest" type="Node2D"]
+script = ExtResource("1_xd3u2")
+
+[node name="Test If 2 projectiles collide with a plane at the same time only one of them hits" type="Node2D" parent="."]
+script = ExtResource("1_qnk1p")
+
+[node name="Test one projectile can only hit one enemy" type="Node2D" parent="."]
+position = Vector2(97, 0)
+script = ExtResource("4_oogq2")
