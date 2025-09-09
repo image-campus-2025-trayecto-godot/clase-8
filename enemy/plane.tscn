@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqkvovjo1rubu"]
+[gd_scene load_steps=10 format=3 uid="uid://cqkvovjo1rubu"]
 
 [ext_resource type="Script" uid="uid://bxasvebc6xkf5" path="res://enemy/enemy.gd" id="1_4srbt"]
 [ext_resource type="Texture2D" uid="uid://dx3k7syivw163" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile271.png" id="2_qrq1p"]
@@ -6,6 +6,29 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4srbt"]
 size = Vector2(42.2118, 51.8656)
+
+[sub_resource type="Gradient" id="Gradient_qrq1p"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.454524, 0.454524, 0.454524, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vad6s"]
+gradient = SubResource("Gradient_qrq1p")
+width = 10
+height = 10
+
+[sub_resource type="Curve" id="Curve_qrq1p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.719595, 0.848006), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vad6s"]
+curve = SubResource("Curve_qrq1p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qrq1p"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 5, 1)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_vad6s")
 
 [node name="Plane" type="PathFollow2D"]
 loop = false
@@ -22,3 +45,15 @@ script = ExtResource("3_qrq1p")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-0.967116, 0.0671995)
 shape = SubResource("RectangleShape2D_4srbt")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -14)
+texture = SubResource("GradientTexture2D_vad6s")
+process_material = SubResource("ParticleProcessMaterial_qrq1p")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 17)
+texture = SubResource("GradientTexture2D_vad6s")
+process_material = SubResource("ParticleProcessMaterial_qrq1p")

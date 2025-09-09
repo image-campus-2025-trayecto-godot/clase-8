@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca5bk0pibgd3v"]
+[gd_scene load_steps=6 format=3 uid="uid://ca5bk0pibgd3v"]
 
 [ext_resource type="Script" uid="uid://cc8704nm7gidx" path="res://tower/cannons/cannon.gd" id="1_s3ixp"]
 [ext_resource type="Texture2D" uid="uid://ta2mfv8ryd5b" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png" id="1_ywdj2"]
 [ext_resource type="PackedScene" uid="uid://c75htjkbwqk8i" path="res://projectiles/rocket.tscn" id="2_woq20"]
+
+[sub_resource type="Animation" id="Animation_woq20"]
+resource_name = "shoot"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hc3i6"]
+_data = {
+&"shoot": SubResource("Animation_woq20")
+}
 
 [node name="CannonRocket" type="Node2D" node_paths=PackedStringArray("projectile_spawns")]
 script = ExtResource("1_s3ixp")
@@ -14,3 +22,8 @@ texture = ExtResource("1_ywdj2")
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]
 position = Vector2(29, -1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hc3i6")
+}

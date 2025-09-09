@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0undg05dkpsq"]
+[gd_scene load_steps=9 format=3 uid="uid://d0undg05dkpsq"]
 
 [ext_resource type="Script" uid="uid://dg6ecpr6bt74a" path="res://projectiles/rocket_explosion.gd" id="1_c27on"]
 [ext_resource type="Texture2D" uid="uid://dtr4q0gvhvx8h" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile298.png" id="1_yonc3"]
@@ -6,42 +6,29 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyl8n"]
 radius = 50.0
 
-[sub_resource type="Animation" id="Animation_evlvg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RocketExplosion/Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
+[sub_resource type="Gradient" id="Gradient_c27on"]
+offsets = PackedFloat32Array(0, 0.451852, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.933333, 0.933333, 0.933333, 0.951895, 0, 0, 0, 0.278431)
 
-[sub_resource type="Animation" id="Animation_5ffeg"]
-resource_name = "new_animation"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("RocketExplosion/Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(3, 3)]
-}
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nuoux"]
+gradient = SubResource("Gradient_c27on")
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c1ex3"]
-_data = {
-&"RESET": SubResource("Animation_evlvg"),
-&"new_animation": SubResource("Animation_5ffeg")
-}
+[sub_resource type="Curve" id="Curve_c27on"]
+_data = [Vector2(0, 0.195323), 0.0, 0.0, 0, 0, Vector2(0.10473, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.311554), 0.0, 0.0, 0, 0, Vector2(1, 0.418845), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_nuoux"]
+curve = SubResource("Curve_c27on")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c27on"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 180.0
+initial_velocity_max = 140.71
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_nuoux")
+color_ramp = SubResource("GradientTexture1D_nuoux")
 
 [node name="RocketExplosion" type="Node2D"]
 top_level = true
@@ -53,12 +40,11 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
 shape = SubResource("CircleShape2D_iyl8n")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
 texture = ExtResource("1_yonc3")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_c1ex3")
-}
-autoplay = "new_animation"
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.53
+process_material = SubResource("ParticleProcessMaterial_c27on")

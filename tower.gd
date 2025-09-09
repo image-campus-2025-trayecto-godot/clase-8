@@ -29,7 +29,7 @@ func shoot() -> void:
 	await shoot_timer.timeout
 	can_shoot = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if enemies.is_empty():
 		return
 	var closest_enemy = _closest_enemy()

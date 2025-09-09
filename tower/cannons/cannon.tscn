@@ -1,7 +1,84 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddam2am8jha44"]
+[gd_scene load_steps=12 format=3 uid="uid://ddam2am8jha44"]
 
 [ext_resource type="Script" uid="uid://cc8704nm7gidx" path="res://tower/cannons/cannon.gd" id="1_ecltb"]
 [ext_resource type="Texture2D" uid="uid://qqie7kfm2c66" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png" id="1_eh727"]
+[ext_resource type="Texture2D" uid="uid://dtr4q0gvhvx8h" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile298.png" id="3_g4l4h"]
+
+[sub_resource type="Gradient" id="Gradient_g4l4h"]
+offsets = PackedFloat32Array(0, 0.755556)
+colors = PackedColorArray(1, 1, 1, 1, 0.371817, 3.7903e-07, 4.81308e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1ptf7"]
+gradient = SubResource("Gradient_g4l4h")
+
+[sub_resource type="Curve" id="Curve_81l88"]
+_data = [Vector2(0, 1), 0.0, -1.44354, 0, 0, Vector2(0.10473, 0.901651), 0.0, 0.0, 0, 0, Vector2(1, 0.0254471), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vinrt"]
+curve = SubResource("Curve_81l88")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ptf7"]
+particle_flag_disable_z = true
+initial_velocity_min = 116.79
+initial_velocity_max = 116.79
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -11.68
+linear_accel_max = -2.23517e-06
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_vinrt")
+color_ramp = SubResource("GradientTexture1D_1ptf7")
+
+[sub_resource type="Animation" id="Animation_g4l4h"]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-18, 0), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.12),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1ptf7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ptf7"]
+_data = {
+&"RESET": SubResource("Animation_1ptf7"),
+&"shoot": SubResource("Animation_g4l4h")
+}
 
 [node name="Cannon" type="Node2D" node_paths=PackedStringArray("projectile_spawns")]
 script = ExtResource("1_ecltb")
@@ -14,3 +91,18 @@ offset = Vector2(0, -14)
 
 [node name="ProjectileSpawn" type="Marker2D" parent="."]
 position = Vector2(38, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(42, -1)
+emitting = false
+amount = 20
+texture = ExtResource("3_g4l4h")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1ptf7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1ptf7")
+}
