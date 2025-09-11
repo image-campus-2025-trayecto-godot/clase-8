@@ -1,20 +1,111 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl1jaqbs44u2l"]
+[gd_scene load_steps=17 format=3 uid="uid://cl1jaqbs44u2l"]
 
 [ext_resource type="Script" uid="uid://bxasvebc6xkf5" path="res://enemy/enemy.gd" id="1_0ljmc"]
 [ext_resource type="Texture2D" uid="uid://cokxkhsp2w06i" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile270.png" id="2_0ljmc"]
+[ext_resource type="PackedScene" uid="uid://c7asx5uvwitkg" path="res://fx/armored_plane_falling.tscn" id="2_p1cuk"]
 [ext_resource type="Script" uid="uid://l2wakr1660fy" path="res://enemy/enemy_hitbox.gd" id="3_p1cuk"]
+[ext_resource type="PackedScene" uid="uid://dx5o1h4bkh4sb" path="res://fx/Fire.tscn" id="3_r2tr0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4srbt"]
 size = Vector2(42.2118, 51.8656)
 
+[sub_resource type="Animation" id="Animation_vad6s"]
+resource_name = "hit"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitParticles")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tkogy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tkogy"]
+_data = {
+&"RESET": SubResource("Animation_tkogy"),
+&"hit": SubResource("Animation_vad6s")
+}
+
+[sub_resource type="Gradient" id="Gradient_vad6s"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p1cuk"]
+gradient = SubResource("Gradient_vad6s")
+width = 5
+height = 5
+
+[sub_resource type="Gradient" id="Gradient_s7h11"]
+offsets = PackedFloat32Array(0, 0.238245, 0.670846, 0.789969)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1, 1, 0.932961, 0.932961, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hno78"]
+gradient = SubResource("Gradient_s7h11")
+
+[sub_resource type="Curve" id="Curve_6u8q7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8wnwu"]
+curve = SubResource("Curve_6u8q7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uft80"]
+particle_flag_disable_z = true
+spread = 105.283
+initial_velocity_min = 122.72
+initial_velocity_max = 138.39
+gravity = Vector3(0, 98, 0)
+scale_min = 2.0
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_8wnwu")
+color_initial_ramp = SubResource("GradientTexture1D_hno78")
+
 [node name="ArmoredPlane" type="PathFollow2D"]
 loop = false
 script = ExtResource("1_0ljmc")
-hit_points = 3
+falling_scene = ExtResource("2_p1cuk")
+hit_points = 4
 speed = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0ljmc")
+
+[node name="Fire" parent="." instance=ExtResource("3_r2tr0")]
+position = Vector2(2, -12)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 0
@@ -23,3 +114,16 @@ script = ExtResource("3_p1cuk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-0.967116, 0.0671995)
 shape = SubResource("RectangleShape2D_4srbt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tkogy")
+}
+
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+emitting = false
+texture = SubResource("GradientTexture2D_p1cuk")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_uft80")

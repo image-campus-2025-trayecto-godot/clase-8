@@ -13,6 +13,6 @@ func shoot():
 func spawn_projectiles():
 	for projectile_spawn in projectile_spawns:
 		var projectile = projectile_scene.instantiate()
-		projectile.be_shot(Vector2.RIGHT.rotated(rotation) * 400)
+		projectile.be_shot(Vector2.RIGHT.rotated(global_rotation) * 400)
 		projectile_spawn.add_child(projectile)
 		projectile.global_position = projectile_spawn.global_position

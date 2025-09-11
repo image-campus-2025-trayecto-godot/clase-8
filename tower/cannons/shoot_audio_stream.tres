@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://ciijahb4ry5i6"]
+
+[ext_resource type="AudioStream" uid="uid://npx5g5s3ebcp" path="res://assets/kenney_sci-fi-sounds/Audio/laserSmall_000.ogg" id="1_jvilm"]
+[ext_resource type="AudioStream" uid="uid://p1vnbfrgu1ti" path="res://assets/kenney_sci-fi-sounds/Audio/laserSmall_001.ogg" id="2_riby1"]
+[ext_resource type="AudioStream" uid="uid://bbcmwr7yw3hk1" path="res://assets/kenney_sci-fi-sounds/Audio/laserSmall_002.ogg" id="3_7qw5b"]
+[ext_resource type="AudioStream" uid="uid://d01wd3fy7lhxl" path="res://assets/kenney_sci-fi-sounds/Audio/laserSmall_003.ogg" id="4_7jdqg"]
+[ext_resource type="AudioStream" uid="uid://ch0fg84fsd4bj" path="res://assets/kenney_sci-fi-sounds/Audio/laserSmall_004.ogg" id="5_t6csb"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_jvilm")
+stream_1/stream = ExtResource("2_riby1")
+stream_2/stream = ExtResource("3_7qw5b")
+stream_3/stream = ExtResource("4_7jdqg")
+stream_4/stream = ExtResource("5_t6csb")

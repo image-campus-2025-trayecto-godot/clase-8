@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://bfvvxrb4pe1at"]
+[gd_scene load_steps=12 format=4 uid="uid://bfvvxrb4pe1at"]
 
 [ext_resource type="Texture2D" uid="uid://b44lqg7cnmwty" path="res://assets/kenney_tower-defense-top-down/Tilesheet/towerDefense_tilesheet.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://bvfpfy40cnggs" path="res://horde_spawner.gd" id="2_r0du0"]
 [ext_resource type="PackedScene" uid="uid://cqkvovjo1rubu" path="res://enemy/plane.tscn" id="3_fos0i"]
 [ext_resource type="PackedScene" uid="uid://b05paano74ijp" path="res://tower/tower.tscn" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://cl1jaqbs44u2l" path="res://enemy/armored_plane.tscn" id="4_lgr22"]
 [ext_resource type="PackedScene" uid="uid://cuf72vampr746" path="res://tower/cannons/cannon_double.tscn" id="6_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://ca5bk0pibgd3v" path="res://tower/cannons/cannon_rocket.tscn" id="7_lgr22"]
 
@@ -346,11 +347,11 @@ anchor_mode = 0
 position = Vector2(102, 246)
 script = ExtResource("2_r0du0")
 routes = [NodePath("../RouteA"), NodePath("../RouteB")]
-possible_enemies = Array[PackedScene]([ExtResource("3_fos0i")])
+possible_enemies = Array[PackedScene]([ExtResource("4_lgr22"), ExtResource("3_fos0i")])
 enemy_amount = 100
 
 [node name="SpawnTimer" type="Timer" parent="HordeSpawner"]
-wait_time = 0.05
+wait_time = 0.4
 autostart = true
 
 [node name="RouteA" type="Path2D" parent="."]
@@ -360,12 +361,14 @@ curve = SubResource("Curve2D_uu6xs")
 curve = SubResource("Curve2D_r0du0")
 
 [node name="Tower" parent="." instance=ExtResource("3_r0du0")]
-position = Vector2(978, 364)
+position = Vector2(388, 155)
 
 [node name="Tower2" parent="." instance=ExtResource("3_r0du0")]
-position = Vector2(1023, 520)
+position = Vector2(466, 415)
 cannon_scene = ExtResource("6_3dxm6")
+time_between_shoots = 1.0
 
 [node name="Tower3" parent="." instance=ExtResource("3_r0du0")]
-position = Vector2(807, 469)
+position = Vector2(568, 271)
 cannon_scene = ExtResource("7_lgr22")
+time_between_shoots = 0.8

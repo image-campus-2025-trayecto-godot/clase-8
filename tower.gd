@@ -4,13 +4,17 @@ extends Node2D
 @onready var cannon: Node2D
 @onready var shoot_timer: Timer = $ShootTimer
 @export var cannon_scene: PackedScene
+@onready var base: Sprite2D = $Base
+@export var rotation_speed: float = 5.0
+@export var time_between_shoots: float = 0.5
 
 var enemies = []
 var can_shoot: bool = true
 
 func _ready() -> void:
+	shoot_timer.wait_time = time_between_shoots
 	cannon = cannon_scene.instantiate()
-	add_child(cannon)
+	base.add_child(cannon)
 	area_2d.area_entered.connect(on_area_entered)
 	area_2d.area_exited.connect(on_area_exited)
 
@@ -29,11 +33,15 @@ func shoot() -> void:
 	await shoot_timer.timeout
 	can_shoot = true
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if enemies.is_empty():
 		return
 	var closest_enemy = _closest_enemy()
-	cannon.look_at(closest_enemy.global_position)
+	
+	var direction_to_enemy: Vector2 = cannon.global_position.direction_to(closest_enemy.global_position)
+	var target_rotation: float = direction_to_enemy.angle()
+	cannon.global_rotation = rotate_toward(cannon.global_rotation, target_rotation, delta * rotation_speed)
+	
 	if can_shoot:
 		shoot()
 

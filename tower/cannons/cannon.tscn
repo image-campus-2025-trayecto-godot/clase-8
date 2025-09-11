@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddam2am8jha44"]
+[gd_scene load_steps=13 format=3 uid="uid://ddam2am8jha44"]
 
 [ext_resource type="Script" uid="uid://cc8704nm7gidx" path="res://tower/cannons/cannon.gd" id="1_ecltb"]
 [ext_resource type="Texture2D" uid="uid://qqie7kfm2c66" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile249.png" id="1_eh727"]
 [ext_resource type="Texture2D" uid="uid://dtr4q0gvhvx8h" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile298.png" id="3_g4l4h"]
+[ext_resource type="AudioStream" uid="uid://ciijahb4ry5i6" path="res://tower/cannons/shoot_audio_stream.tres" id="4_1ptf7"]
 
 [sub_resource type="Gradient" id="Gradient_g4l4h"]
 offsets = PackedFloat32Array(0, 0.755556)
@@ -28,6 +29,21 @@ linear_accel_max = -2.23517e-06
 scale_min = 0.1
 scale_curve = SubResource("CurveTexture_vinrt")
 color_ramp = SubResource("GradientTexture1D_1ptf7")
+
+[sub_resource type="Animation" id="Animation_1ptf7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_g4l4h"]
 resource_name = "shoot"
@@ -58,21 +74,21 @@ tracks/1/keys = {
 "method": &"restart"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_1ptf7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_1ptf7")
+}],
+"times": PackedFloat32Array(0)
 }
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ptf7"]
 _data = {
@@ -106,3 +122,6 @@ process_material = SubResource("ParticleProcessMaterial_1ptf7")
 libraries = {
 &"": SubResource("AnimationLibrary_1ptf7")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

@@ -1,7 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0undg05dkpsq"]
+[gd_scene load_steps=17 format=3 uid="uid://d0undg05dkpsq"]
 
 [ext_resource type="Script" uid="uid://dg6ecpr6bt74a" path="res://projectiles/rocket_explosion.gd" id="1_c27on"]
 [ext_resource type="Texture2D" uid="uid://dtr4q0gvhvx8h" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile298.png" id="1_yonc3"]
+[ext_resource type="AudioStream" uid="uid://c8vj8a2ot17aq" path="res://assets/kenney_sci-fi-sounds/Audio/explosionCrunch_000.ogg" id="3_g3mt5"]
+[ext_resource type="AudioStream" uid="uid://cem565r2l1vhw" path="res://assets/kenney_sci-fi-sounds/Audio/explosionCrunch_001.ogg" id="4_5hg3d"]
+[ext_resource type="AudioStream" uid="uid://bnujaus32iag3" path="res://assets/kenney_sci-fi-sounds/Audio/explosionCrunch_002.ogg" id="5_x8u6f"]
+[ext_resource type="AudioStream" uid="uid://bgf3ppo5vt37t" path="res://assets/kenney_sci-fi-sounds/Audio/explosionCrunch_003.ogg" id="6_82brx"]
+[ext_resource type="AudioStream" uid="uid://50wktyovglmq" path="res://assets/kenney_sci-fi-sounds/Audio/explosionCrunch_004.ogg" id="7_jy8fq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyl8n"]
 radius = 50.0
@@ -30,6 +35,53 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_nuoux")
 color_ramp = SubResource("GradientTexture1D_nuoux")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pcy1m"]
+random_pitch = 1.1
+streams_count = 5
+stream_0/stream = ExtResource("3_g3mt5")
+stream_1/stream = ExtResource("4_5hg3d")
+stream_2/stream = ExtResource("5_x8u6f")
+stream_3/stream = ExtResource("6_82brx")
+stream_4/stream = ExtResource("7_jy8fq")
+
+[sub_resource type="Animation" id="Animation_g3mt5"]
+resource_name = "explode"
+length = 1.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"restart"
+}]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_pcy1m")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hg3d"]
+_data = {
+&"explode": SubResource("Animation_g3mt5")
+}
+
 [node name="RocketExplosion" type="Node2D"]
 top_level = true
 script = ExtResource("1_c27on")
@@ -48,3 +100,11 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 0.53
 process_material = SubResource("ParticleProcessMaterial_c27on")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5hg3d")
+}

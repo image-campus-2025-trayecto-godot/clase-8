@@ -1,10 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuf72vampr746"]
+[gd_scene load_steps=6 format=3 uid="uid://cuf72vampr746"]
 
 [ext_resource type="Texture2D" uid="uid://d1kd4ti6qm3ol" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png" id="1_6ciym"]
 [ext_resource type="Script" uid="uid://cc8704nm7gidx" path="res://tower/cannons/cannon.gd" id="1_cpyxh"]
+[ext_resource type="AudioStream" uid="uid://ciijahb4ry5i6" path="res://tower/cannons/shoot_audio_stream.tres" id="3_jfiby"]
 
 [sub_resource type="Animation" id="Animation_cpyxh"]
 resource_name = "shoot"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_jfiby")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_jfiby")
+}],
+"times": PackedFloat32Array(0.166667)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jfiby"]
 _data = {
@@ -30,3 +61,6 @@ position = Vector2(38, 7)
 libraries = {
 &"": SubResource("AnimationLibrary_jfiby")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

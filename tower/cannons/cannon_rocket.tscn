@@ -1,16 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca5bk0pibgd3v"]
+[gd_scene load_steps=10 format=3 uid="uid://ca5bk0pibgd3v"]
 
 [ext_resource type="Script" uid="uid://cc8704nm7gidx" path="res://tower/cannons/cannon.gd" id="1_s3ixp"]
 [ext_resource type="Texture2D" uid="uid://ta2mfv8ryd5b" path="res://assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile291.png" id="1_ywdj2"]
 [ext_resource type="PackedScene" uid="uid://c75htjkbwqk8i" path="res://projectiles/rocket.tscn" id="2_woq20"]
+[ext_resource type="AudioStream" uid="uid://dka7al1b7rpxf" path="res://assets/kenney_sci-fi-sounds/Audio/laserLarge_000.ogg" id="4_ofo0s"]
+[ext_resource type="AudioStream" uid="uid://b7opbxc23ciuw" path="res://assets/kenney_sci-fi-sounds/Audio/laserLarge_001.ogg" id="5_x06t7"]
+[ext_resource type="AudioStream" uid="uid://b8rtq067y0aiq" path="res://assets/kenney_sci-fi-sounds/Audio/laserLarge_002.ogg" id="6_gxnjk"]
 
 [sub_resource type="Animation" id="Animation_woq20"]
 resource_name = "shoot"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/0/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hc3i6"]
 _data = {
 &"shoot": SubResource("Animation_woq20")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rdkij"]
+streams_count = 3
+stream_0/stream = ExtResource("4_ofo0s")
+stream_1/stream = ExtResource("5_x06t7")
+stream_2/stream = ExtResource("6_gxnjk")
 
 [node name="CannonRocket" type="Node2D" node_paths=PackedStringArray("projectile_spawns")]
 script = ExtResource("1_s3ixp")
@@ -27,3 +47,7 @@ position = Vector2(29, -1)
 libraries = {
 &"": SubResource("AnimationLibrary_hc3i6")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_rdkij")
+bus = &"SFX"

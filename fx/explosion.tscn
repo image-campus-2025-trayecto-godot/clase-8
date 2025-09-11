@@ -1,0 +1,79 @@
+[gd_scene load_steps=16 format=3 uid="uid://lktbcpl0yua5"]
+
+[ext_resource type="Script" uid="uid://chn81l4pbqep8" path="res://fx/explosion.gd" id="1_srif0"]
+
+[sub_resource type="Gradient" id="Gradient_1wbg1"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cudjy"]
+gradient = SubResource("Gradient_1wbg1")
+width = 5
+height = 5
+
+[sub_resource type="Gradient" id="Gradient_srif0"]
+offsets = PackedFloat32Array(0, 0.685185, 0.974074)
+colors = PackedColorArray(0, 0, 0, 1, 0.957319, 0, 0.0435247, 1, 0.860495, 0.708578, 0.0244562, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1wbg1"]
+gradient = SubResource("Gradient_srif0")
+
+[sub_resource type="Gradient" id="Gradient_cudjy"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_by01o"]
+gradient = SubResource("Gradient_cudjy")
+
+[sub_resource type="Curve" id="Curve_1wbg1"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.986486, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cudjy"]
+curve = SubResource("Curve_1wbg1")
+
+[sub_resource type="CurveTexture" id="CurveTexture_srif0"]
+
+[sub_resource type="Curve" id="Curve_cudjy"]
+_limits = [-5.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 1.93316), 55.7799, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_by01o"]
+curve = SubResource("Curve_cudjy")
+
+[sub_resource type="Curve" id="Curve_srif0"]
+_data = [Vector2(0, 0.293673), 0.0, 0.0, 0, 0, Vector2(0.243243, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00756538), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1wbg1"]
+curve = SubResource("Curve_srif0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_siol0"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+spread = 180.0
+initial_velocity_min = 134.73
+initial_velocity_max = 134.73
+radial_velocity_min = -5.00002
+radial_velocity_max = 25.0
+radial_velocity_curve = SubResource("CurveTexture_by01o")
+gravity = Vector3(0, 0, 0)
+linear_accel_curve = SubResource("CurveTexture_srif0")
+damping_max = 0.1
+damping_curve = SubResource("CurveTexture_cudjy")
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_1wbg1")
+color_ramp = SubResource("GradientTexture1D_by01o")
+color_initial_ramp = SubResource("GradientTexture1D_1wbg1")
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_srif0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 50
+texture = SubResource("GradientTexture2D_cudjy")
+lifetime = 0.4
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_siol0")
