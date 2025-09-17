@@ -5,6 +5,7 @@ const EXPLOSION = preload("res://fx/explosion.tscn")
 
 @export var falling_scene: PackedScene = preload("res://fx/plane_falling.tscn")
 
+@export var score: int = 1
 @export var hit_points: int = 1
 @onready var current_hit_points: int = hit_points
 @export_range(1, 1000, 1) var speed: float = 100.0
@@ -38,6 +39,7 @@ func on_received_damage():
 		explode()
 
 func explode():
+	GameManager.an_enemy_died(self)
 	fire.reparent(get_parent())
 	fire.one_shot = true
 	var explosion = EXPLOSION.instantiate()

@@ -9,6 +9,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4srbt"]
 size = Vector2(42.2118, 51.8656)
 
+[sub_resource type="Animation" id="Animation_tkogy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_vad6s"]
 resource_name = "hit"
 length = 0.15
@@ -37,21 +52,6 @@ tracks/1/keys = {
 "args": [false],
 "method": &"restart"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_tkogy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tkogy"]
@@ -98,6 +98,7 @@ color_initial_ramp = SubResource("GradientTexture1D_hno78")
 loop = false
 script = ExtResource("1_0ljmc")
 falling_scene = ExtResource("2_p1cuk")
+score = 2
 hit_points = 4
 speed = 200.0
 

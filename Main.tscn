@@ -1,12 +1,17 @@
-[gd_scene load_steps=12 format=4 uid="uid://bfvvxrb4pe1at"]
+[gd_scene load_steps=19 format=4 uid="uid://bfvvxrb4pe1at"]
 
 [ext_resource type="Texture2D" uid="uid://b44lqg7cnmwty" path="res://assets/kenney_tower-defense-top-down/Tilesheet/towerDefense_tilesheet.png" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://bvfpfy40cnggs" path="res://horde_spawner.gd" id="2_r0du0"]
+[ext_resource type="Script" uid="uid://cde6nhyjags83" path="res://shaker.gd" id="2_trn2v"]
 [ext_resource type="PackedScene" uid="uid://cqkvovjo1rubu" path="res://enemy/plane.tscn" id="3_fos0i"]
 [ext_resource type="PackedScene" uid="uid://b05paano74ijp" path="res://tower/tower.tscn" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://cl1jaqbs44u2l" path="res://enemy/armored_plane.tscn" id="4_lgr22"]
 [ext_resource type="PackedScene" uid="uid://cuf72vampr746" path="res://tower/cannons/cannon_double.tscn" id="6_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://ca5bk0pibgd3v" path="res://tower/cannons/cannon_rocket.tscn" id="7_lgr22"]
+[ext_resource type="Theme" uid="uid://0hucwlmg0i46" path="res://ui/theme.tres" id="9_20pc6"]
+[ext_resource type="Script" uid="uid://b3f8iuy2os81p" path="res://hud.gd" id="10_20pc6"]
+[ext_resource type="PackedScene" uid="uid://c5ai30rjoypus" path="res://ui/score.tscn" id="11_5vvyt"]
+[ext_resource type="Texture2D" uid="uid://dmb57qvgmgmhb" path="res://assets/kenney_ui-pack-space-expansion/PNG/Red/Default/button_square_header_small_rectangle_screws.png" id="12_5vvyt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0du0"]
 texture = ExtResource("1_uu6xs")
@@ -315,6 +320,10 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/1 = SubResource("TileSetAtlasSource_r0du0")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_trn2v"]
+noise_type = 3
+frequency = 0.5
+
 [sub_resource type="Curve2D" id="Curve2D_uu6xs"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -5, 95, 0, 0, 0, 0, 74, 99, 0, 0, 0, 0, 92, 130, 0, 0, 0, 0, 100, 151, 0, 0, 0, 0, 127, 160, 0, 0, 0, 0, 144, 160, 0, 0, 0, 0, 175, 160, 0, 0, 0, 0, 195, 169, 0, 0, 0, 0, 218, 180, 0, 0, 0, 0, 231, 199, 0, 0, 0, 0, 239, 215, 0, 0, 0, 0, 256, 232, 0, 0, 0, 0, 275, 247, 0, 0, 0, 0, 295, 261, 0, 0, 0, 0, 324, 273, 0, 0, 0, 0, 351, 281, 0, 0, 0, 0, 408, 291, 0, 0, 0, 0, 443, 288, 0, 0, 0, 0, 457, 281, 0, 0, 0, 0, 470, 264, 0, 0, 0, 0, 489, 233, 0, 0, 0, 0, 496, 207, 0, 0, 0, 0, 501, 188, 0, 0, 0, 0, 516, 163, 0, 0, 0, 0, 537, 163, 0, 0, 0, 0, 553, 135, 0, 0, 0, 0, 566, 118, 0, 0, 0, 0, 581, 110, 0, 0, 0, 0, 593, 108, 0, 0, 0, 0, 612, 107, 0, 0, 0, 0, 669, 92, 0, 0, 0, 0, 698, 92, 0, 0, 0, 0, 721, 96, 0, 0, 0, 0, 730, 110, 0, 0, 0, 0, 735, 130, 0, 0, 0, 0, 753, 147, 0, 0, 0, 0, 775, 155, 0, 0, 0, 0, 779, 168, 0, 0, 0, 0, 786, 192, 0, 0, 0, 0, 797, 213, 0, 0, 0, 0, 803, 239, 0, 0, 0, 0, 811, 265, 0, 0, 0, 0, 814, 295, 0, 0, 0, 0, 818, 321, 0, 0, 0, 0, 817, 351, 0, 0, 0, 0, 817, 380, 0, 0, 0, 0, 828, 401, 0, 0, 0, 0, 895, 400, 0, 0, 0, 0, 908, 400, 0, 0, 0, 0, 942, 405, 0, 0, 0, 0, 967, 413, 0, 0, 0, 0, 999, 420, 0, 0, 0, 0, 1019, 425, 0, 0, 0, 0, 1035, 442, 0, 0, 0, 0, 1044, 466, 0, 0, 0, 0, 1040, 504, 0, 0, 0, 0, 1043, 528, 0, 0, 0, 0, 1059, 557, 0, 0, 0, 0, 1063, 591, 0, 0, 0, 0, 1060, 615, 0, 0, 0, 0, 1051, 627, 0, 0, 0, 0, 1044, 653, 0, 0, 0, 0, 1044, 667)
@@ -327,7 +336,14 @@ _data = {
 }
 point_count = 62
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c6i3y"]
+texture = ExtResource("12_5vvyt")
+texture_margin_left = 12.4028
+texture_margin_top = 18.3382
+texture_margin_right = 12.4028
+texture_margin_bottom = 12.0431
+
+[node name="Level" type="Node2D"]
 texture_filter = 2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -343,12 +359,19 @@ tile_set = SubResource("TileSet_cm0pq")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
+[node name="Shaker" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2_trn2v")
+camera = NodePath("../Camera2D")
+intensity = 2.0
+max_intensity = 10.0
+noise = SubResource("FastNoiseLite_trn2v")
+frequency = 20.0
+
 [node name="HordeSpawner" type="Node2D" parent="." node_paths=PackedStringArray("routes")]
 position = Vector2(102, 246)
 script = ExtResource("2_r0du0")
 routes = [NodePath("../RouteA"), NodePath("../RouteB")]
 possible_enemies = Array[PackedScene]([ExtResource("4_lgr22"), ExtResource("3_fos0i")])
-enemy_amount = 100
 
 [node name="SpawnTimer" type="Timer" parent="HordeSpawner"]
 wait_time = 0.4
@@ -372,3 +395,48 @@ time_between_shoots = 1.0
 position = Vector2(568, 271)
 cannon_scene = ExtResource("7_lgr22")
 time_between_shoots = 0.8
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_20pc6")
+script = ExtResource("10_20pc6")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/MarginContainer"]
+layout_mode = 2
+
+[node name="Score" parent="CanvasLayer/HUD/MarginContainer/VBoxContainer" instance=ExtResource("11_5vvyt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ElapsedTime" type="Label" parent="CanvasLayer/HUD/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxTexture_c6i3y")
+text = "Time: "
+
+[node name="WaveProgress" type="ProgressBar" parent="CanvasLayer/HUD/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 50.0

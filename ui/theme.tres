@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://0hucwlmg0i46"]
+
+[ext_resource type="FontFile" uid="uid://bt41peeotbyd" path="res://assets/kenney_ui-pack-space-expansion/Font/Kenney Future.ttf" id="1_rqugq"]
+
+[resource]
+Label/constants/outline_size = 7
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("1_rqugq")
